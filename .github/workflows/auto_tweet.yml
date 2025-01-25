@@ -1,0 +1,29 @@
+name: LINE Bot Auto Tweet
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 毎日日本時間9時 (UTC 0時)
+  workflow_dispatch:  # 手動実行も可能
+
+jobs:
+  auto_tweet:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: pip install -r src/requirements.txt
+
+    - name: Run Auto Tweet
+      env:
+        LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+        LINE_GROUP_ID: ${{ secrets.LINE_GROUP_ID }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      run: python src/main.py
