@@ -80,8 +80,6 @@ project/
 
 このプロジェクトはMITライセンスの下で提供されています。
 
----
-
 ## 貢献
 
 このプロジェクトへの貢献を歓迎します。バグ報告や新しい機能の提案については、[Issues](https://github.com/your-username/your-repository/issues)でご連絡ください。
