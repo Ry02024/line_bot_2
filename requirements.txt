@@ -1,0 +1,4 @@
+google-generativeai
+line-bot-sdk
+requests
+requests-oauthlib
