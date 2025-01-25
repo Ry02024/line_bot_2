@@ -1,10 +1,6 @@
 import random
 import sys
 import os
-
-# プロジェクトルートをパスに追加
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 from services.config import Config
 from services.gemini import Gemini
 from services.line_bot import LineBot
