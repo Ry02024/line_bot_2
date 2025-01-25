@@ -47,7 +47,7 @@ def generate_article(topic):
     トピック: {topic}
     """
     try:
-        response = genai.generate_text(prompt)
+        response = genai.generate_content(prompt)
         return response.result.strip() if response.result else "記事を生成できませんでした。"
     except Exception as e:
         print(f"❌ Gemini APIエラー: {e}")
