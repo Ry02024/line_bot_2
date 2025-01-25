@@ -47,8 +47,14 @@ def generate_article(topic):
     トピック: {topic}
     """
     try:
-        response = genai.GenerativeModel(model_name="gemini-1.5-pro").generate_content(contents=[prompt])
-        return response.result.strip() if response.result else "記事を生成できませんでした。"
+        # Gemini APIで文章を生成
+        response = genai.generate_text(model="text-bison-001", prompt=prompt)
+
+        # レスポンスから生成された文章を取得
+        if response and response.candidates:
+            return response.candidates[0]["output"]  # 正しい属性でテキストを取得
+        else:
+            return "記事を生成できませんでした。"
     except Exception as e:
         print(f"❌ Gemini APIエラー: {e}")
         return "Gemini APIで記事生成に失敗しました。"
