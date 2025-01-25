@@ -1,44 +1,42 @@
-name: LINE Bot Message Scheduler
+name: LINE Bot Task
 
 on:
-  workflow_dispatch:       # 手動実行のトリガーを追加
   schedule:
-    - cron: '0 22 * * *'   # 日本時間 7時
-    - cron: '0 0 * * *'    # 日本時間 9時
-    - cron: '0 3 * * *'    # 日本時間 12時
-    - cron: '0 6 * * *'    # 日本時間 15時
-    - cron: '0 9 * * *'    # 日本時間 18時
-    - cron: '0 12 * * *'   # 日本時間 21時
+    - cron: "0 9 * * *" # 毎日午前9時に実行
+  workflow_dispatch: # 手動トリガー対応
 
 jobs:
-  send_message:
+  run_line_bot:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      # リポジトリをチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9
+      # Pythonをセットアップ
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt
+      # 依存ライブラリのインストール
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r src/requirements.txt
 
-    - name: Debug - Print environment variables
-      run: |
-        echo "LINE_CHANNEL_ACCESS_TOKEN1=${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}"
-        echo "LINE_GROUP_ID=${{ secrets.LINE_GROUP_ID }}"
-        echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}"
-      env:
-        LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-        LINE_GROUP_ID: ${{ secrets.LINE_GROUP_ID }}
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 環境変数の設定
+      - name: Set environment variables
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN1: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN1 }}
+          LINE_CHANNEL_ACCESS_TOKEN2: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN2 }}
+          LINE_CHANNEL_ACCESS_TOKEN3: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN3 }}
+          LINE_GROUP_ID: ${{ secrets.LINE_GROUP_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          echo "環境変数が設定されました。"
 
-    - name: Send LINE message
-      env:
-        LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-        LINE_GROUP_ID: ${{ secrets.LINE_GROUP_ID }}
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: python src/main.py
+      # スクリプトの実行
+      - name: Run LINE Bot
+        run: python src/main.py
