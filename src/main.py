@@ -48,11 +48,11 @@ def generate_article(topic):
     """
     try:
         # Gemini APIで文章を生成
-        response = genai.generate_text(model="text-bison-001", prompt=prompt)
+        response = genai.generate_text(prompt=prompt)
 
         # レスポンスから生成された文章を取得
-        if response and response.candidates:
-            return response.candidates[0]["output"]  # 正しい属性でテキストを取得
+        if response and 'candidates' in response and response['candidates']:
+            return response['candidates'][0]['output']  # 正しい属性でテキストを取得
         else:
             return "記事を生成できませんでした。"
     except Exception as e:
