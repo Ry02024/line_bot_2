@@ -1,6 +1,8 @@
 name: Test Main Flow
 
 on:
+  workflow_dispatch: # 手動トリガー対応
+
   push:
     paths:
       - "src/tests/test_main.py"
