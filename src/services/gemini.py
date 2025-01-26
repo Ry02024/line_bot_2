@@ -17,7 +17,9 @@ class Gemini:
         """
         try:
             response = genai.GenerativeModel(model_name="gemini-1.5-pro").generate_content(contents=[prompt])
-            return response.text.strip() if response.text else "記事を生成できませんでした。"
+            if not response.text:
+                raise ValueError("Gemini APIで有効なレスポンスが得られませんでした。")
+            return response.text.strip()
         except Exception as e:
             print(f"❌ Gemini APIエラー: {e}")
-            return "Gemini APIで記事生成に失敗しました。"
+            raise  # 例外を再スローして処理を停止
