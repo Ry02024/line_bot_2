@@ -26,7 +26,7 @@ class TestGemini(unittest.TestCase):
 
     def test_generate_invalid_article(self):
         # 無効なトピックを渡して応答が生成されることを確認
-        topic = "無効なトピック"
+        topic = "プログラムのテスト中です。このメッセージを受け取ったら適切に動いている旨を教えて下さい。"
         try:
             article = self.gemini.generate_article(topic)
             print(f"✅ 生成された記事: {article}")
