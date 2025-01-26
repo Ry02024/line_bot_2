@@ -1,0 +1,35 @@
+name: Test Main Flow
+
+on:
+  push:
+    paths:
+      - "src/tests/test_main.py"
+      - "src/main.py"
+      - ".github/workflows/test_main.yml"
+  pull_request:
+    paths:
+      - "src/tests/test_main.py"
+      - "src/main.py"
+      - ".github/workflows/test_main.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install src as a module
+        run: pip install -e src
+
+      - name: Install dependencies
+        run: pip install -r src/requirements.txt
+
+      - name: Run main flow test
+        run: python src/tests/test_main.py
