@@ -1,6 +1,8 @@
 name: Test Config and TokenManager
 
 on:
+  workflow_dispatch: # 手動トリガー対応
+
   push:
     branches:
       - main
