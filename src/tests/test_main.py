@@ -8,6 +8,8 @@ class TestMain(unittest.TestCase):
         # デバッグ用に環境変数の確認
         self.token_manager = TokenManager()
         print(f"✅ 設定されたトークン: {self.token_manager.tokens}")
+        print(f"✅ Debug GOOGLE_API_KEY: {os.getenv('GOOGLE_API_KEY')}")
+
 
     def test_main_flow(self):
         # GeminiとLineBotの動作確認
