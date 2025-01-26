@@ -36,7 +36,6 @@ class TestMain(unittest.TestCase):
         try:
             line_bot.post_to_line(article[:140])
             print("✅ メッセージ送信成功")
-            
         except Exception as e:
             self.fail(f"❌ メッセージ送信失敗: {e}")
 
