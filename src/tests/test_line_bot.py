@@ -1,5 +1,5 @@
 import unittest
-from services.line_bot import LineBot
+from src.services.line_bot import LineBot
 
 class TestLineBot(unittest.TestCase):
     def setUp(self):
