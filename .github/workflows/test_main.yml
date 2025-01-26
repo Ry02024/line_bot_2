@@ -39,7 +39,7 @@ jobs:
         run: pip install -e src
 
       - name: Install dependencies
-        run: pip install -r src/requirements.txt
+        run: pip install -r requirements.txt  # 修正: ルート直下のrequirements.txtを使用
 
       - name: Run main flow test
         run: python src/tests/test_main.py
