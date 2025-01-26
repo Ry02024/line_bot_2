@@ -1,4 +1,4 @@
-from services.config import Config, TokenManager
+from src.services.config import Config, TokenManager
 
 if __name__ == "__main__":
     try:
