@@ -15,7 +15,7 @@ class TestMain(unittest.TestCase):
         line_bot = LineBot()
     
         topic = "テストトピック: 実行フロー確認"
-        print(f"✅ テストトピック: {topic}")
+        print(f"✅ {topic}")
     
         # 記事を生成
         article = gemini.generate_article(topic)
