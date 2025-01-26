@@ -1,8 +1,6 @@
 name: Test Gemini
 
 on:
-  workflow_dispatch: # 手動トリガー対応
-
   push:
     paths:
       - "src/tests/test_gemini.py"  # test_gemini.pyが変更されたときのみトリガー
@@ -31,9 +29,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Add src to PYTHONPATH
+    - name: Install src as a module
       run: |
-        echo "PYTHONPATH=$PYTHONPATH:$(pwd)/src" >> $GITHUB_ENV
+        pip install -e src
 
     - name: Run gemini tests
       run: |
