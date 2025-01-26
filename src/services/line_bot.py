@@ -21,7 +21,7 @@ class LineBot:
                 configuration = Configuration(access_token=self.access_token)
                 self.api_client = ApiClient(configuration=configuration)
                 self.messaging_api = MessagingApi(api_client=self.api_client)
-
+    
                 # メッセージを送信
                 message = TextMessage(text=text)
                 push_message_request = PushMessageRequest(to=Config.LINE_GROUP_ID, messages=[message])
@@ -31,4 +31,6 @@ class LineBot:
             except Exception as e:
                 print(f"⚠️ エラー: {e}. 次のトークンを試します...")
                 self.token_manager.switch_token()
-        print("❌ 全てのトークンでメッセージ送信に失敗しました。")
+        # 全てのトークンで失敗した場合、例外をスロー
+        raise RuntimeError("全てのトークンでメッセージ送信に失敗しました。")
+
