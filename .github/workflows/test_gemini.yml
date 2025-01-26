@@ -5,10 +5,12 @@ on:
 
   push:
     paths:
+      - ".github/workflows/test_gemini.yml"  # このYMLファイルが変更されたとき
       - "src/services/gemini.py"   # gemini.pyが変更されたときもトリガー
       - "src/tests/test_gemini.py"  # test_gemini.pyが変更されたときのみトリガー
   pull_request:
     paths:
+      - ".github/workflows/test_gemini.yml"  # このYMLファイルが変更されたとき
       - "src/services/gemini.py"   # gemini.pyが変更されたときもトリガー
       - "src/tests/test_gemini.py"
 
