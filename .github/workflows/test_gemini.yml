@@ -1,6 +1,8 @@
 name: Test Gemini
 
 on:
+  workflow_dispatch: # 手動トリガー対応
+
   push:
     paths:
       - "src/tests/test_gemini.py"  # test_gemini.pyが変更されたときのみトリガー
