@@ -1,9 +1,9 @@
 import random
 import sys
 import os
-from services.config import Config
-from services.gemini import Gemini
-from services.line_bot import LineBot
+from src.services.config import Config
+from src.services.gemini import Gemini
+from src.services.line_bot import LineBot
 
 # トピックリスト
 TOPICS = [
