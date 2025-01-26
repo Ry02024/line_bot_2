@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from config import Config
+from services.config import Config  # パスを修正
 
 class Gemini:
     def __init__(self):
