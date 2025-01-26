@@ -4,11 +4,12 @@ on:
   workflow_dispatch: # 手動トリガー対応
 
   push:
-    branches:
-      - main
+    paths:
+      - "src/tests/test_config.py"
   pull_request:
-    branches:
-      - main
+    paths:
+      - "src/tests/test_config.py"
+
 
 jobs:
   test-config:
