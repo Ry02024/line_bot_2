@@ -1,6 +1,6 @@
 from linebot.v3.messaging import MessagingApi, Configuration, ApiClient
 from linebot.v3.messaging.models import TextMessage, PushMessageRequest
-from utils import TokenManager
+from services.config import TokenManager
 
 class LineBot:
     def __init__(self):
