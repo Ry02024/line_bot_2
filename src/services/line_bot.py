@@ -1,10 +1,11 @@
 from linebot.v3.messaging import MessagingApi, Configuration, ApiClient
 from linebot.v3.messaging.models import TextMessage, PushMessageRequest
-from services.config import TokenManager
+from services.config import Config, TokenManager
 
 class LineBot:
     def __init__(self):
         self.token_manager = TokenManager()
+        self.group_id = Config.LINE_GROUP_ID  # グループIDをインスタンス変数に保存
         self._configure_line_bot()
 
     def _configure_line_bot(self):
