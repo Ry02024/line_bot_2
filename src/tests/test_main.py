@@ -1,4 +1,4 @@
-import unittest
+import os, unittest
 from services.config import TokenManager
 from services.gemini import Gemini
 from services.line_bot import LineBot
