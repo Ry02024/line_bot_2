@@ -38,7 +38,7 @@ jobs:
           echo "LINE_CHANNEL_ACCESS_TOKEN1: $LINE_CHANNEL_ACCESS_TOKEN1"
           echo "LINE_CHANNEL_ACCESS_TOKEN2: $LINE_CHANNEL_ACCESS_TOKEN2"
           echo "LINE_GROUP_ID: $LINE_GROUP_ID"
-          echo "GOOGLE_API_KEY: $GOOGLE_API_KEY"
+          echo "GEMINI_API_KEY : $GEMINI_API_KEY "
 
       - name: Install src as a module
         run: pip install -e src
