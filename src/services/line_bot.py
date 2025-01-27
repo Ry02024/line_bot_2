@@ -33,11 +33,11 @@ class LineBot:
                 return
     
             except Exception as e:
-                # エラー詳細をログ出力
+                # 無効な `to` フィールドのエラーを特定して ValueError を発生
+                if "The property, 'to', in the request body is invalid" in str(e):
+                    raise ValueError(f"無効なGroup IDが指定されています: {Config.LINE_GROUP_ID}")
+                
                 print(f"⚠️ メッセージ送信エラー: {e}")
-                if hasattr(e, 'status') and hasattr(e, 'reason'):
-                    print(f"レスポンスステータス: {e.status}")
-                    print(f"レスポンス内容: {e.reason}")
                 self.token_manager.switch_token()
         
         # 全てのトークンで失敗した場合
