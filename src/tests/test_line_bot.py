@@ -1,5 +1,6 @@
 import unittest
 from services.line_bot import LineBot
+from services.config import Config
 
 class TestLineBot(unittest.TestCase):
     def setUp(self):
