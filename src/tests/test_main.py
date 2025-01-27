@@ -29,8 +29,11 @@ class TestMain(unittest.TestCase):
             if len(article.strip()) == 0:
                 self.fail("❌ 生成された記事が空です。Gemini APIの動作を確認してください。")
     
+        except InternalServerError as e:
+            self.fail(f"❌ 記事生成中にサーバーエラー: {e}")
+    
         except Exception as e:
-            self.fail(f"❌ 記事生成中にエラー: {e}")
+            self.fail(f"❌ 記事生成中にその他のエラー: {e}")
     
         # メッセージを送信
         try:
