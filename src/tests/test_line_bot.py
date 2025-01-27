@@ -25,11 +25,16 @@ class TestLineBot(unittest.TestCase):
             self.fail(f"❌ メッセージ送信に失敗しました: {e}")
             
     def test_post_to_line_invalid_group_id(self):
-        # 異常系: 不正なGroup ID
+        # 異常系: 無効なGroup ID
         invalid_group_id = "InvalidID"
-        Config.LINE_GROUP_ID = invalid_group_id
-        with self.assertRaises(ValueError):
-            self.line_bot.post_to_line("テストメッセージ")
-            
+        original_group_id = Config.LINE_GROUP_ID
+        Config.LINE_GROUP_ID = invalid_group_id  # 一時的に無効なGroup IDを設定
+    
+        try:
+            with self.assertRaises(ValueError):
+                self.line_bot.post_to_line("テストメッセージ")
+        finally:
+            Config.LINE_GROUP_ID = original_group_id  # 元の値に戻す
+      
 if __name__ == "__main__":
     unittest.main()
