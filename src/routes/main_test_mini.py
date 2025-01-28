@@ -1,15 +1,16 @@
 import os
-from linebot.v3.messaging import MessagingApi, Configuration, ApiClient
-from linebot.v3.messaging.models import TextMessage, PushMessageRequest
+import requests
 
-# 環境変数の取得（GitHub Secretsで設定）
+# 環境変数を取得
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN2")
-LINE_GROUP_ID = os.getenv("LINE_GROUP_ID").strip()  # 余計な空白・改行を削除
+GROUP_ID = os.getenv("LINE_GROUP_ID")
 
-print(f"GROUP_ID: {GROUP_ID}")  # これで groupId の出力を確認
+# 取得した `groupId` を確認する
+print(f"📌 DEBUG: GROUP_ID = '{GROUP_ID}'")  # GitHub Actions のログに出力
 
-if not GROUP_ID.startswith("C"):
-    raise ValueError("GROUP_ID がグループIDの形式ではありません！")
+# `groupId` が None や空ならエラーを出す
+if not GROUP_ID or not GROUP_ID.startswith("C"):
+    raise ValueError("❌ ERROR: 環境変数 `LINE_GROUP_ID` が正しく設定されていません！")
 
 headers = {
     'Content-Type': 'application/json',
@@ -17,14 +18,18 @@ headers = {
 }
 
 data = {
-    "to": GROUP_ID,  # ここが正しく設定されているか
+    "to": GROUP_ID.strip(),  # スペース・改行削除
     "messages": [
         {"type": "text", "text": "GitHub Actions からのテストメッセージ"}
     ]
 }
 
+# API リクエストを送信
 response = requests.post('https://api.line.me/v2/bot/message/push', headers=headers, json=data)
-print(response.status_code, response.json())
+
+# レスポンスのステータスと内容をログに出力
+print(f"📌 DEBUG: Response Status Code = {response.status_code}")
+print(f"📌 DEBUG: Response JSON = {response.json()}")
 
 def send_message():
     """LINEグループに「あ」を送る関数"""
