@@ -3,7 +3,7 @@ from linebot.v3.messaging import MessagingApi, Configuration, ApiClient
 from linebot.v3.messaging.models import TextMessage, PushMessageRequest
 
 # 環境変数の取得（GitHub Secretsで設定）
-LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
+LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN2")
 LINE_GROUP_ID = os.getenv("LINE_GROUP_ID")
 
 def send_message():
