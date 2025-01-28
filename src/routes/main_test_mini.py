@@ -4,7 +4,27 @@ from linebot.v3.messaging.models import TextMessage, PushMessageRequest
 
 # 環境変数の取得（GitHub Secretsで設定）
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv("LINE_CHANNEL_ACCESS_TOKEN2")
-LINE_GROUP_ID = os.getenv("LINE_GROUP_ID")
+LINE_GROUP_ID = os.getenv("LINE_GROUP_ID").strip()  # 余計な空白・改行を削除
+
+print(f"GROUP_ID: {GROUP_ID}")  # これで groupId の出力を確認
+
+if not GROUP_ID.startswith("C"):
+    raise ValueError("GROUP_ID がグループIDの形式ではありません！")
+
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': f'Bearer {LINE_CHANNEL_ACCESS_TOKEN}'
+}
+
+data = {
+    "to": GROUP_ID,  # ここが正しく設定されているか
+    "messages": [
+        {"type": "text", "text": "GitHub Actions からのテストメッセージ"}
+    ]
+}
+
+response = requests.post('https://api.line.me/v2/bot/message/push', headers=headers, json=data)
+print(response.status_code, response.json())
 
 def send_message():
     """LINEグループに「あ」を送る関数"""
